@@ -1,10 +1,16 @@
 const express = require("express");
-const router  = express.Router();
+const router  = express.Router({ mergeParams: true });
 
 const {
-  asyncErrorHandler
+  asyncErrorHandler,
+  isNotAuthenticated
 } = require('../middleware');
 
-const {} = require('../controllers/comment');
+const {
+  getNewComment
+} = require('../controllers/comment');
+
+/* GET new comment */
+router.get('/new', asyncErrorHandler(isNotAuthenticated), asyncErrorHandler(getNewComment));
 
 module.exports = router;

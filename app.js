@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-const debug = require('debug')('async-await-yelpcamp:app');
+const debug = require('debug')('yelpcamp-refactored:app');
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
@@ -16,7 +16,6 @@ const MongoDBStore = require('connect-mongo')(session);
 const expressSanitizer = require('express-sanitizer');
 
 const usersRouter = require('./routes/users');
-const contactRouter = require('./routes/contact');
 const commentRouter = require('./routes/comment');
 const campgroundRouter = require('./routes/campground');
 const indexRouter = require('./routes/index');
@@ -97,8 +96,7 @@ app.use((req, res, next) => {
 
 
 app.use('/campgrounds', campgroundRouter);
-app.use('/campgrounds/:slug/comments', commentRouter);
-app.use('/contact', contactRouter);
+app.use('/campgrounds/:id/comments', commentRouter);
 app.use('/users', usersRouter);
 app.use('/', indexRouter);
 
